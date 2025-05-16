@@ -9,7 +9,7 @@ export default function LoginCard() {
       <h2 className="text-center text-xl font-bold text-blue-500 mb-6">CourierSync - Iniciar Sesión</h2>
       <LoginForm />
       <p className="text-center mt-4 text-sm">
-        ¿No tienes cuenta? <a href="#" className="text-blue-500 font-semibold">Regístrate</a>
+        ¿No tienes cuenta? <a href="/register" className="text-blue-500 font-semibold">Regístrate</a>
       </p>
     </div>
   );

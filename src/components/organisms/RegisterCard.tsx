@@ -10,7 +10,7 @@ export default function RegisterCard() {
       <h2 className="text-center text-xl font-semibold text-blue-500 mb-4">CourierSync - Registro</h2>
       <RegisterForm />
       <p className="text-center mt-4 text-sm">
-        ¿Ya tienes cuenta? <a href="#" className="text-blue-500">Inicia sesión</a>
+        ¿Ya tienes cuenta? <a href="/usuarios" className="text-blue-500">Inicia sesión</a>
       </p>
     </div>
   );
