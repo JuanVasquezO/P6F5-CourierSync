@@ -1,8 +1,6 @@
 import Button from "@/components/atoms/CrudButton";
-import { useRouter } from 'next/router';
 
 export default function InvoiceTable() {
-  const router = useRouter();
   return (
     <div className="p-8 text-white w-[95%] mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-[#0984e3]">Listado de Facturas</h2>
