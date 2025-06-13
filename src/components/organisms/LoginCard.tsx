@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function LoginCard() {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-xl w-80 text-gray-800">
+    <div className="bg-white p-6 rounded-xl shadow-xl w-100 text-gray-800">
       <Logo />
       <h2 className="text-center text-xl font-bold text-blue-500 mb-6">CourierSync - Iniciar Sesión</h2>
       <LoginForm />
