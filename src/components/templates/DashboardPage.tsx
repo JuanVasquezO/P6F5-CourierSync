@@ -6,7 +6,7 @@ import DashboardGrid from "@/components/organisms/DashboardGrid";
 export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient">
-      <Header />
+      <Header title="Dashboard" backLink="/" />
       <Navbar />
       <main className="p-6">
         <DashboardGrid />

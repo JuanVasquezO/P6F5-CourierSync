@@ -1,25 +1,25 @@
-// src/app/dashboard/page.tsx
-import Header from "@/components/atoms/DashboardHeader";
-import Navbar from "@/components/molecules/DashboardNavbar";
-import DashboardGrid from "@/components/organisms/DashboardGrid";
-import Head from "next/head";
+// src/pages/dashboard/index.tsx
+import Head from 'next/head'
+import PageLayout from '@/components/templates/PageLayout'
+import Navbar from '@/components/molecules/DashboardNavbar'
+import DashboardGrid from '@/components/organisms/DashboardGrid'
 
-export default function index() {
+export default function DashboardPage() {
   return (
     <>
       <Head>
-        <title>CourierSync - Dashboard</title>
+        <title>CourierSync – Dashboard</title>
       </Head>
-      <main>
-        <div className="min-h-screen bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white">
-      <Header title="" backLink="/" />
+
+      <PageLayout title="CourierSync – Dashboard Financiero" backLink="/">
+        {/* aquí va tu navbar lateral o de pestañas */}
         <Navbar />
-        <main className="p-6">
-        <DashboardGrid />
-      </main>
-    </div>
-      </main>
+
+        <div className="p-6">
+          {/* el contenido principal del dashboard */}
+          <DashboardGrid />
+        </div>
+      </PageLayout>
     </>
-    
-  );
+  )
 }

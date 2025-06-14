@@ -33,7 +33,7 @@ export default function PageLayout({
         {/* Cerrar sesión */}
         <div className="absolute top-4 right-4">
           <Link href="/usuarios">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow transition">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow transition cursor-pointer">
               Cerrar sesión
             </button>
           </Link>
