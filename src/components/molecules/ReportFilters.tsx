@@ -33,7 +33,7 @@ export default function ReportFilters({ onApply, loading }: Props) {
       <Button
         onClick={onApply}
         disabled={loading}
-        className={`mt-4 sm:mt-0 w-full sm:w-auto ${loading ? 'opacity-50 cursor-wait' : ''}`}
+        className={`mt-4 cursor-pointer sm:mt-0 w-full sm:w-auto ${loading ? 'opacity-50 cursor-wait' : ''}`}
       >
         {loading ? 'Cargando…' : 'Aplicar'}
       </Button>

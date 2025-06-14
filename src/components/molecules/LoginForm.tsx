@@ -62,6 +62,7 @@ export default function LoginForm() {
       <Input
         id="email"
         label="Correo Electrónico"
+        labelClassName='text.gray-700'
         type="email"
         value={email}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
@@ -69,6 +70,7 @@ export default function LoginForm() {
       <Input
         id="password"
         label="Contraseña"
+        labelClassName='text.gray-700'
         type="password"
         value={password}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
@@ -76,7 +78,7 @@ export default function LoginForm() {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      <Button type="submit">
+      <Button type="submit" className='cursor-pointer'>
         {isLoading ? "Entrando..." : "Entrar"}
       </Button>
     </form>

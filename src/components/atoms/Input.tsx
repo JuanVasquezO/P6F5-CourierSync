@@ -8,6 +8,7 @@ export type InputProps = {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
+  labelClassName?: string
 }
 
 export default function Input({
@@ -17,11 +18,12 @@ export default function Input({
   value,
   onChange,
   className = '',
+  labelClassName = 'text-white',
 }: InputProps) {
   return (
     <div className={`space-y-1 mb-4 ${className}`}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-white">
+        <label htmlFor={id} className={`block text-sm font-medium ${labelClassName}`}>
           {label}
         </label>
       )}
@@ -34,7 +36,8 @@ export default function Input({
         required
         className="
           block w-full px-4 py-3
-          bg-white text-gray-900 placeholder-gray-300
+          bg-white text-gray-900 placeholder-gray-400
+          border border-gray-300
           rounded-lg shadow-sm
           focus:outline-none focus:ring-2 focus:ring-blue-500
         "

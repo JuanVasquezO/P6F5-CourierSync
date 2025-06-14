@@ -1,37 +1,75 @@
-import Button from "@/components/atoms/CrudButton";
+// src/components/organisms/InvoiceTable.tsx
+import React from 'react'
+import Button from '@/components/atoms/Button'
 
-export default function InvoiceTable() {
+export type Invoice = {
+  id: string
+  cliente: string
+  envio: string
+  fecha: string
+  monto: string
+  estado: 'PENDIENTE' | 'PAGADO'
+}
+
+export type InvoiceTableProps = {
+  invoices: Invoice[]
+  onEdit: (inv: Invoice) => void
+  onDelete: (id: string) => void
+}
+
+export default function InvoiceTable({
+  invoices,
+  onEdit,
+  onDelete,
+}: InvoiceTableProps) {
   return (
-    <div className="p-8 text-white w-[95%] mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-[#0984e3]">Listado de Facturas</h2>
-      <Button type="submit" text="+ Nueva Factura" className="bg-green-600 text-white my-4 cursor-pointer"/>
-      <table className="w-full text-white border-collapse">
+    <div className="overflow-x-auto mb-6">
+      <table className="w-full border-collapse text-white">
         <thead>
-          <tr className="bg-[#0984e3]">
-            <th className="p-4 text-left">ID</th>
-            <th className="p-4 text-left">Cliente</th>
-            <th className="p-4 text-left">Envío</th>
-            <th className="p-4 text-left">Fecha</th>
-            <th className="p-4 text-left">Monto</th>
-            <th className="p-4 text-left">Estado</th>
-            <th className="p-4 text-left">Acciones</th>
+          <tr className="bg-blue-500">
+            {['ID', 'Cliente', 'Envío', 'Fecha', 'Monto', 'Estado', 'Acciones'].map((h) => (
+              <th key={h} className="py-2 px-4">
+                {h}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-transparent border-b border-white/10">
-            <td className="p-4">001</td>
-            <td className="p-4">Juan Pérez</td>
-            <td className="p-4">#ENV1234</td>
-            <td className="p-4">2025-05-05</td>
-            <td className="p-4">$120.000</td>
-            <td className="p-4">Pendiente</td>
-            <td className="p-4">
-              <Button text="Editar" className="bg-blue-400 text-white mr-2 cursor-pointer"/>
-              <Button text="Eliminar" className="bg-red-600 text-white cursor-pointer" />
-            </td>
-          </tr>
+          {invoices.length === 0 && (
+            <tr>
+              <td colSpan={7} className="py-4 text-center text-gray-300">
+                No hay facturas.
+              </td>
+            </tr>
+          )}
+          {invoices.map((inv) => (
+            <tr key={inv.id} className="border-b border-white/20">
+              <td className="py-2 px-4">{inv.id}</td>
+              <td className="py-2 px-4">{inv.cliente}</td>
+              <td className="py-2 px-4">{inv.envio}</td>
+              <td className="py-2 px-4">{inv.fecha}</td>
+              <td className="py-2 px-4">{inv.monto}</td>
+              <td className="py-2 px-4">{inv.estado}</td>
+              <td className="py-2 px-4">
+                <div className="flex space-x-2">
+                  <Button
+                    onClick={() => onEdit(inv)}
+                    className="bg-blue-400 hover:bg-blue-500 cursor-pointer"
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    onClick={() => onDelete(inv.id)}
+                    className="bg-red-500 hover:bg-red-600 cursor-pointer"
+                  >
+                    Eliminar
+                  </Button>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
-  );
+  )
 }

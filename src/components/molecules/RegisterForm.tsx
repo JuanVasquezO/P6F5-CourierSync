@@ -108,6 +108,7 @@ export default function RegisterForm() {
       <Input
         id="firstName"
         label="Nombre"
+        labelClassName='text-gray-700'
         type="text"
         value={firstName}
         onChange={(e) => {
@@ -118,6 +119,7 @@ export default function RegisterForm() {
       <Input
         id="lastName"
         label="Apellido"
+        labelClassName='text-gray-700'
         type="text"
         value={lastName}
         onChange={(e) => {
@@ -128,6 +130,7 @@ export default function RegisterForm() {
       <Input
         id="email"
         label="Correo Electrónico"
+        labelClassName='text-gray-700'
         type="email"
         value={email}
         onChange={(e) => {
@@ -138,6 +141,7 @@ export default function RegisterForm() {
       <Input
         id="password"
         label="Contraseña"
+        labelClassName='text-gray-700'
         type="password"
         value={password}
         onChange={(e) => {
@@ -148,6 +152,7 @@ export default function RegisterForm() {
       <Select
         id="role"
         label="Rol"
+        labelClassName='text-gray-700'
         options={roles}
         value={role}
         onChange={(e) => {
@@ -159,7 +164,7 @@ export default function RegisterForm() {
       {error && <p className="text-red-500 text-sm">{error}</p>}
       {success && <p className="text-green-600 text-sm">{success}</p>}
 
-      <Button type="submit">Registrarse</Button>
+      <Button type="submit" className='cursor-pointer'>Registrarse</Button>
     </form>
   );
 }
