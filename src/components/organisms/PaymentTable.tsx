@@ -1,36 +1,73 @@
-import Button from "@/components/atoms/CrudButton";
+// src/components/organisms/PaymentTable.tsx
+import React from 'react'
+import Button from '@/components/atoms/Button'
 
-export default function InvoiceTable() {
+export type Payment = {
+  id: string
+  cliente: string
+  envio: string
+  fecha: string
+  monto: string
+  estado: 'PENDIENTE' | 'PAGADO'
+}
+
+export type PaymentTableProps = {
+  payments: Payment[]
+  onEdit: (p: Payment) => void
+  onDelete: (id: string) => void
+}
+
+export default function PaymentTable({
+  payments,
+  onEdit,
+  onDelete,
+}: PaymentTableProps) {
   return (
-    <div className="p-8 text-white w-[95%] mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-[#0984e3]">Listado de Facturas</h2>
-      <Button text="+ Nueva Factura" className="bg-green-600 text-white my-4" />
-      <table className="w-full text-white border-collapse">
+    <div className="overflow-x-auto mb-6">
+      <table className="w-full border-collapse text-white">
         <thead>
-          <tr className="bg-[#0984e3]">
-            <th className="p-4 text-left">ID</th>
-            <th className="p-4 text-left">Cliente</th>
-            <th className="p-4 text-left">Fecha</th>
-            <th className="p-4 text-left">Monto</th>
-            <th className="p-4 text-left">Estado</th>
-            <th className="p-4 text-left">Acciones</th>
+          <tr className="bg-blue-500">
+            {['ID', 'Cliente', 'Envío', 'Fecha', 'Monto', 'Estado', 'Acciones'].map((h) => (
+              <th key={h} className="py-2 px-4">{h}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-transparent border-b border-white/10">
-            <td className="p-4">001</td>
-            <td className="p-4">Juan Pérez</td>
-            <td className="p-4">2025-05-05</td>
-            <td className="p-4">$120.000</td>
-            <td className="p-4">Pendiente</td>
-            <td className="p-4">
-              <Button text="Editar" className="bg-blue-400 text-white mr-2" />
-              <Button text="Eliminar" className="bg-red-600 text-white" />
-            </td>
-          </tr>
+          {payments.map((p) => (
+            <tr key={p.id} className="border-b border-white/20">
+              <td className="py-2 px-4">{p.id}</td>
+              <td className="py-2 px-4">{p.cliente}</td>
+              <td className="py-2 px-4">{p.envio}</td>
+              <td className="py-2 px-4">{p.fecha}</td>
+              <td className="py-2 px-4">{p.monto}</td>
+              <td className="py-2 px-4">{p.estado}</td>
+              <td className="py-2 px-4">
+                <div className="flex space-x-2">
+                  <Button
+                    onClick={() => onEdit(p)}
+                    className="bg-blue-400 hover:bg-blue-500 cursor-pointer"
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    onClick={() => onDelete(p.id)}
+                    className="bg-red-500 hover:bg-red-600 cursor-pointer"
+                  >
+                    Eliminar
+                  </Button>
+                </div>
+              </td>
+            </tr>
+          ))}
+          {payments.length === 0 && (
+            <tr>
+              <td colSpan={7} className="py-4 text-center text-gray-300">
+                No hay pagos registrados.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-
     </div>
-  );
+  )
 }

@@ -21,7 +21,7 @@ export default function Input({
   return (
     <div className={`space-y-1 mb-4 ${className}`}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-600">
+        <label htmlFor={id} className="block text-sm font-medium text-white">
           {label}
         </label>
       )}
@@ -34,7 +34,7 @@ export default function Input({
         required
         className="
           block w-full px-4 py-3
-          bg-white text-gray-900 placeholder-gray-400
+          bg-white text-gray-900 placeholder-gray-300
           rounded-lg shadow-sm
           focus:outline-none focus:ring-2 focus:ring-blue-500
         "

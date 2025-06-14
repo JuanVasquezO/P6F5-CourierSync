@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <>
       <Head>
-        <title>Iniciar Sesión | CourierSync</title>
+        <title>CourierSync - Iniciar Sesión</title>
       </Head>
       <main
         className={`

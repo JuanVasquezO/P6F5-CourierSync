@@ -6,7 +6,7 @@ export default function RegisterPage() {
   return (
     <>
       <Head>
-        <title>Registro | CourierSync</title>
+        <title>CourierSync - Registro</title>
       </Head>
       <main
         className={`

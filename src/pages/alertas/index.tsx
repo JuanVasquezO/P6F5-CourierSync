@@ -1,6 +1,5 @@
 // src/pages/alertas/index.tsx
 import React from 'react';
-import Head from 'next/head';
 import PageLayout from '@/components/templates/PageLayout';
 import AlertGrid from '@/components/organisms/AlertGrid';
 
@@ -13,10 +12,7 @@ const mockAlerts = [
 export default function AlertasPage() {
   return (
     <>
-      <Head>
-        <title>CourierSync – Alertas</title>
-      </Head>
-      <PageLayout title="Alertas" backLink="/dashboard">
+      <PageLayout title="CourierSync – Alertas" backLink="/dashboard">
         <h2 className="text-xl font-semibold text-white mb-4">Alertas de Facturación</h2>
         <AlertGrid alerts={mockAlerts} />
       </PageLayout>
