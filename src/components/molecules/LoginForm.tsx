@@ -76,10 +76,9 @@ export default function LoginForm() {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      <Button 
-        text={isLoading ? "Entrando..." : "Entrar"} 
-        type="submit"
-      />
+      <Button type="submit">
+        {isLoading ? "Entrando..." : "Entrar"}
+      </Button>
     </form>
   );
 }

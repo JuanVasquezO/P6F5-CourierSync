@@ -1,15 +1,25 @@
-import Link from "next/link";
+// src/components/atoms/DashboardHeader.tsx
+import React from 'react';
+import Link from 'next/link';
+import BackButton from './BackButton'; // si lo tienes en otra ruta, ajusta
 
-export default function DashboardHeader() {
+type DashboardHeaderProps = {
+  title: string;
+  backLink: string;
+};
+
+export default function DashboardHeader({ title, backLink }: DashboardHeaderProps) {
   return (
-    <header className="bg-blue-500 p-4 flex items-center justify-between">
-      <h1 className="text-2xl font-bold text-white text-center w-full sm:w-auto">
-        CourierSync - Dashboard Financiero
+    <header className="bg-blue-500 p-4 flex items-center justify-between relative">
+      <BackButton to={backLink} />
+
+      <h1 className="flex-1 text-2xl font-bold text-white text-center">
+        {title}
       </h1>
 
       <div className="absolute right-4">
         <Link href="/usuarios">
-          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow cursor-pointer transition">
+          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow transition">
             Cerrar sesión
           </button>
         </Link>

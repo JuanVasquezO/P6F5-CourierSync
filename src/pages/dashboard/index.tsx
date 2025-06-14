@@ -8,11 +8,11 @@ export default function index() {
   return (
     <>
       <Head>
-        <title>Dashboard | CourierSync</title>
+        <title>CourierSync - Dashboard</title>
       </Head>
       <main>
         <div className="min-h-screen bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white">
-      <Header />
+      <Header title="" backLink="/" />
         <Navbar />
         <main className="p-6">
         <DashboardGrid />

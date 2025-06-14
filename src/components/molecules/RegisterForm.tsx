@@ -159,7 +159,7 @@ export default function RegisterForm() {
       {error && <p className="text-red-500 text-sm">{error}</p>}
       {success && <p className="text-green-600 text-sm">{success}</p>}
 
-      <Button text="Registrarse" type="submit" />
+      <Button type="submit">Registrarse</Button>
     </form>
   );
 }

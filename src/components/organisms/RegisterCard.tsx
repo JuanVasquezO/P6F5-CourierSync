@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function RegisterCard() {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md text-gray-800 max-h-[90vh] overflow-auto">
+    <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md text-gray-800">
       <Logo />
       <h2 className="text-center text-xl font-semibold text-blue-500 mb-3">
         CourierSync - Registro
