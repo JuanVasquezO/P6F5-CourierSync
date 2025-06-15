@@ -6,13 +6,13 @@ export type Column<Row> = {
   accessor: keyof Row;
 };
 
-type TableProps<Row extends Record<string, any>> = {
+type TableProps<Row extends Record<string, unknown>> = {
   columns: Column<Row>[];
   data: Row[];
   className?: string;
 };
 
-function Table<Row extends Record<string, any>>({
+function Table<Row extends Record<string, unknown>>({
   columns,
   data,
   className = '',
@@ -33,7 +33,10 @@ function Table<Row extends Record<string, any>>({
           <tr key={rowIdx} className="border-b">
             {columns.map((col, colIdx) => (
               <td key={colIdx} className="py-2 px-4">
-                {row[col.accessor]}
+                {
+                  // Aseguramos que se pueda mostrar aunque sea un valor desconocido
+                  String(row[col.accessor])
+                }
               </td>
             ))}
           </tr>
