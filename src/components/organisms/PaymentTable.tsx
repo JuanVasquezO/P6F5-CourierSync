@@ -35,13 +35,13 @@ export default function PaymentTable({
         <tbody>
           {payments.map((p) => (
             <tr key={p.id} className="border-b border-white/20">
-              <td className="py-2 px-4">{p.id}</td>
-              <td className="py-2 px-4">{p.cliente}</td>
-              <td className="py-2 px-4">{p.envio}</td>
-              <td className="py-2 px-4">{p.fecha}</td>
-              <td className="py-2 px-4">{p.monto}</td>
-              <td className="py-2 px-4">{p.estado}</td>
-              <td className="py-2 px-4">
+              <td className="py-2 px-4 text-center">{p.id}</td>
+              <td className="py-2 px-4 text-center">{p.cliente}</td>
+              <td className="py-2 px-4 text-center">{p.envio}</td>
+              <td className="py-2 px-4 text-center">{p.fecha}</td>
+              <td className="py-2 px-4 text-center">{p.monto}</td>
+              <td className="py-2 px-4 text-center">{p.estado}</td>
+              <td className="py-2 px-4 text-center">
                 <div className="flex space-x-2">
                   <Button
                     onClick={() => onEdit(p)}

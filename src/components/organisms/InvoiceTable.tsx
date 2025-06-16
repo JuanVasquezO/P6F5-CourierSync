@@ -44,12 +44,12 @@ export default function InvoiceTable({
           )}
           {invoices.map((inv) => (
             <tr key={inv.id} className="border-b border-white/20">
-              <td className="py-2 px-4">{inv.id}</td>
-              <td className="py-2 px-4">{inv.cliente}</td>
-              <td className="py-2 px-4">{inv.envio}</td>
-              <td className="py-2 px-4">{inv.fecha}</td>
-              <td className="py-2 px-4">{inv.monto}</td>
-              <td className="py-2 px-4">{inv.estado}</td>
+              <td className="py-2 px-4 text-center">{inv.id}</td>
+              <td className="py-2 px-4 text-center">{inv.cliente}</td>
+              <td className="py-2 px-4 text-center">{inv.envio}</td>
+              <td className="py-2 px-4 text-center">{inv.fecha}</td>
+              <td className="py-2 px-4 text-center">{inv.monto}</td>
+              <td className="py-2 px-4 text-center">{inv.estado}</td>
               <td className="py-2 px-4">
                 <div className="flex space-x-2">
                   <Button

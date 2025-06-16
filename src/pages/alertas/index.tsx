@@ -4,9 +4,15 @@ import PageLayout from '@/components/templates/PageLayout';
 import AlertGrid from '@/components/organisms/AlertGrid';
 
 const mockAlerts = [
-  { tipo: 'Pago Pendiente', descripcion: 'Factura #F100 vence en 2 días', fecha: '2025-06-06' },
-  { tipo: 'Recordatorio Enviado', descripcion: 'Se envió recordatorio a Juan Pérez', fecha: '2025-05-30' },
-  { tipo: 'Alerta de Vencimiento', descripcion: 'Factura #F101 vencida hace 1 día', fecha: '2025-06-03' },
+  { tipo: 'Factura vencida', descripcion: 'Factura #F101 vencida hace 1 día \n Cliente: Empresa XYZ \n Monto: $850.000 \n Último recordatorio enviado: 25 mayo 2025 ', 
+    fecha: '2025-05-30' },
+  { tipo: 'Pendiente por vencer', descripcion: 'Factura #F103 vence en 2 días \n Cliente: Empresa Freu \n Monto: $850.000 \n Recordatorio programado para mañana ', 
+    fecha: '2025-06-04' },
+  { tipo: 'Recordatorio Enviado', descripcion: 'Factura #F100 proxima a vencer \n Cliente: Juan Perez \n Monto: $300.000 \n Enviado: 03 junio 2025', 
+    fecha: '2025-06-03' },  
+  { tipo: 'Cliente sin correo', descripcion: 'Factura #F050 \n Cliente: Carlos Gómez \nNo se puede enviar recordatorio de vencimiento', fecha: '2025-06-06' },
+  { tipo: 'Pago confirmado', descripcion: 'Factura #F039 \nCliente: Distribuidora Alfa \nMonto: $2.100.000 \nFecha de pago: 06 jun 2025', 
+    fecha: '2025-06-06' },  
 ];
 
 export default function AlertasPage() {
