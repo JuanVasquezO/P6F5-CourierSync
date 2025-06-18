@@ -1,14 +1,12 @@
-// src/components/organisms/PaymentTable.tsx
 import React from 'react'
 import Button from '@/components/atoms/Button'
 
 export type Payment = {
   id: string
-  cliente: string
-  envio: string
-  fecha: string
-  monto: string
-  estado: 'PENDIENTE' | 'PAGADO'
+  manualInvoiceId: number
+  amount: number
+  paymentDate: string
+  // Eliminamos newStatus porque ya no lo usamos
 }
 
 export type PaymentTableProps = {
@@ -27,7 +25,7 @@ export default function PaymentTable({
       <table className="w-full border-collapse text-white">
         <thead>
           <tr className="bg-blue-500">
-            {['ID', 'Cliente', 'Envío', 'Fecha', 'Monto', 'Estado', 'Acciones'].map((h) => (
+            {['ID', 'Factura Manual', 'Monto', 'Fecha', 'Estado', 'Acciones'].map((h) => (
               <th key={h} className="py-2 px-4">{h}</th>
             ))}
           </tr>
@@ -36,13 +34,12 @@ export default function PaymentTable({
           {payments.map((p) => (
             <tr key={p.id} className="border-b border-white/20">
               <td className="py-2 px-4 text-center">{p.id}</td>
-              <td className="py-2 px-4 text-center">{p.cliente}</td>
-              <td className="py-2 px-4 text-center">{p.envio}</td>
-              <td className="py-2 px-4 text-center">{p.fecha}</td>
-              <td className="py-2 px-4 text-center">{p.monto}</td>
-              <td className="py-2 px-4 text-center">{p.estado}</td>
+              <td className="py-2 px-4 text-center">{p.manualInvoiceId}</td>
+              <td className="py-2 px-4 text-center">${p.amount.toFixed(2)}</td>
+              <td className="py-2 px-4 text-center">{p.paymentDate}</td>
+              <td className="py-2 px-4 text-center text-green-400 font-semibold">Pagado</td>
               <td className="py-2 px-4 text-center">
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 justify-center">
                   <Button
                     onClick={() => onEdit(p)}
                     className="bg-blue-400 hover:bg-blue-500 cursor-pointer"
@@ -61,7 +58,7 @@ export default function PaymentTable({
           ))}
           {payments.length === 0 && (
             <tr>
-              <td colSpan={7} className="py-4 text-center text-gray-300">
+              <td colSpan={6} className="py-4 text-center text-gray-300">
                 No hay pagos registrados.
               </td>
             </tr>

@@ -3,18 +3,18 @@ import React from 'react'
 import Button from '@/components/atoms/Button'
 
 export type Invoice = {
-  id: string
-  cliente: string
-  envio: string
-  fecha: string
-  monto: string
-  estado: 'PENDIENTE' | 'PAGADO'
+  id: number;
+  clientName: string;
+  shipmentReferenceId: string;
+  emissionDate: string;
+  amount: number;
+  paymentStatus?: 'PAGADO' | 'PENDIENTE';
 }
 
 export type InvoiceTableProps = {
   invoices: Invoice[]
   onEdit: (inv: Invoice) => void
-  onDelete: (id: string) => void
+  onDelete: (id: number) => void
 }
 
 export default function InvoiceTable({
@@ -45,11 +45,11 @@ export default function InvoiceTable({
           {invoices.map((inv) => (
             <tr key={inv.id} className="border-b border-white/20">
               <td className="py-2 px-4 text-center">{inv.id}</td>
-              <td className="py-2 px-4 text-center">{inv.cliente}</td>
-              <td className="py-2 px-4 text-center">{inv.envio}</td>
-              <td className="py-2 px-4 text-center">{inv.fecha}</td>
-              <td className="py-2 px-4 text-center">{inv.monto}</td>
-              <td className="py-2 px-4 text-center">{inv.estado}</td>
+              <td className="py-2 px-4 text-center">{inv.clientName}</td>
+              <td className="py-2 px-4 text-center">{inv.shipmentReferenceId}</td>
+              <td className="py-2 px-4 text-center">{inv.emissionDate}</td>
+              <td className="py-2 px-4 text-center">{inv.amount}</td>
+              <td className="py-2 px-4 text-center">{inv.paymentStatus || 'PENDIENTE'}</td>
               <td className="py-2 px-4">
                 <div className="flex space-x-2">
                   <Button

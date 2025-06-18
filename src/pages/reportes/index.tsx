@@ -1,47 +1,84 @@
-// src/pages/reportes/index.tsx
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import PageLayout from '@/components/templates/PageLayout'
-import ReportFilters from '@/components/molecules/ReportFilters'
 import ReportGrid from '@/components/organisms/ReportGrid'
+import { AuthContext } from '@/context/AuthContext'
 
-type Metric = { label: string; value: string }
-type Factura = { id: string; cliente: string; fecha: string; monto: string; estado: string }
+export type Invoice = {
+  id: number;
+  clientName: string;
+  shipmentReferenceId: string;
+  emissionDate: string;
+  amount: number;
+  paymentStatus?: 'PAGADO' | 'PENDING';
+};
+
+type Metric = { label: string; value: string };
+type TopClient = { cliente: string; total: string };
 
 export default function ReportesPage() {
-  const [loading, setLoading] = useState(false)
+  const { token } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const [metrics, setMetrics] = useState<Metric[]>([]);
+  const [topClients, setTopClients] = useState<TopClient[]>([]);
 
-  // estados para datos quemados
-  const [metrics, setMetrics] = useState<Metric[]>([])
-  const [upcoming, setUpcoming] = useState<Factura[]>([])
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      document.body.style.cursor = 'wait';
 
-  const handleApply = () => {
-    setLoading(true)
-    document.body.style.cursor = 'wait' // pone cursor de espera
+      try {
+        const res = await fetch('/api/manual-invoices?pageable.page=0&pageable.size=100', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    // simula un fetch de 1s
-    setTimeout(() => {
-      // datos quemados de ejemplo
-      setMetrics([
-        { label: 'Ingresos Totales', value: '$200,000' },
-        { label: 'Pagos Pendientes', value: '$40,000' },
-        { label: 'Facturas por Vencer', value: '5 facturas' },
-        { label: 'Recordatorios Enviados', value: '3 correos' },
-      ])
+        if (!res.ok) throw new Error('Error al obtener facturas');
 
-      setUpcoming([
-        { id: 'F100', cliente: 'Ana Ruiz', fecha: '2025-06-01', monto: '$50,000', estado: 'Pendiente' },
-        { id: 'F101', cliente: 'Carlos Méndez', fecha: '2025-06-03', monto: '$75,000', estado: 'Pendiente' },
-      ])
+        const data = await res.json();
+        const invoices: Invoice[] = data._embedded?.manualInvoiceDTOList || [];
 
-      setLoading(false)
-      document.body.style.cursor = 'default'
-    }, 1000)
-  }
+        // Cálculos
+        const total = invoices.reduce((sum, f) => sum + f.amount, 0);
+        const pendientes = invoices.filter((f) => f.paymentStatus === 'PENDING').length;
+        const clientesUnicos = new Set(invoices.map((f) => f.clientName)).size;
+        const promedio = invoices.length > 0 ? total / invoices.length : 0;
 
-   return (
+        const agrupadoPorCliente = invoices.reduce((acc: Record<string, number>, f) => {
+          acc[f.clientName] = (acc[f.clientName] || 0) + f.amount;
+          return acc;
+        }, {});
+
+        const top = Object.entries(agrupadoPorCliente)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, 3)
+          .map(([cliente, total]) => ({
+            cliente,
+            total: `$${total.toLocaleString()}`,
+          }));
+
+        setMetrics([
+          { label: 'Ingresos esperados', value: `$${total.toLocaleString()}` },
+          { label: 'Pagos Pendientes', value: `${pendientes}` },
+          { label: 'Clientes Activos', value: `${clientesUnicos}` },
+          { label: 'Monto Promedio / Factura', value: `$${promedio.toFixed(2)}` },
+        ]);
+
+        setTopClients(top);
+
+      } catch (error) {
+        console.error('Error al cargar métricas', error);
+      } finally {
+        setLoading(false);
+        document.body.style.cursor = 'default';
+      }
+    };
+
+    fetchInvoices();
+  }, [token]);
+
+  return (
     <PageLayout title="CourierSync – Reportes" backLink="/dashboard">
-      <ReportFilters onApply={handleApply} loading={loading} />
-      <ReportGrid metrics={metrics} upcoming={upcoming} loading={loading} />
+      <ReportGrid metrics={metrics} topClients={topClients} loading={loading} />
     </PageLayout>
-  )
+  );
 }
